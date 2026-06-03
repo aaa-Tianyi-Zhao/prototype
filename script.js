@@ -1,4 +1,4 @@
-// Collection data - Simple items with ID only (no names)
+// Collection data - Simple items with ID only (done by TZ)
 const collectionData = [
     { 
         id: "Item1", 
