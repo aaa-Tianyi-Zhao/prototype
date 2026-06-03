@@ -143,7 +143,7 @@ function showItemDetail(item) {
             font-size: 28px;
             cursor: pointer;
             color: #999;
-        " onclick="closeModal()">×</button>
+        " id="modalCloseBtn">×</button>
     `;
     
     // Item details HTML
@@ -173,7 +173,8 @@ function showItemDetail(item) {
     modalContent.innerHTML = detailsHtml;
     modal.appendChild(modalContent);
     
-    // Close modal when clicking outside
+    // Close events
+    modal.querySelector('#modalCloseBtn').addEventListener('click', closeModal);
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeModal();
@@ -181,16 +182,6 @@ function showItemDetail(item) {
     });
     
     document.body.appendChild(modal);
-    
-    // Add animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-    `;
-    document.head.appendChild(style);
 }
 
 // Close modal function
@@ -221,9 +212,9 @@ function displayItems(items) {
     // Update results count
     resultsCount.innerHTML = `Showing ${items.length} item${items.length > 1 ? 's' : ''}`;
     
-    // Generate HTML for each item - add onclick to open modal
+    // Generate HTML - use data-id instead of passing JSON string inline
     cardGrid.innerHTML = items.map(item => `
-        <div class="collection-card" onclick="showItemDetail(${JSON.stringify(item).replace(/"/g, '&quot;')})" style="cursor: pointer;">
+        <div class="collection-card" data-id="${item.id}" style="cursor: pointer;">
             <div class="card-title">${item.title}</div>
             <div class="card-detail"><strong>ID:</strong> ${item.id}</div>
             <div class="card-detail"><strong>Actor:</strong> ${item.actor}</div>
@@ -243,10 +234,8 @@ function performSearch() {
     const searchTerm = document.getElementById('searchInput').value;
     const typeFilter = document.getElementById('typeFilter').value;
     
-    // Start with all data
     let filtered = [...collectionData];
     
-    // Apply search term filter (case insensitive)
     if (searchTerm && searchTerm.trim() !== '') {
         const term = searchTerm.toLowerCase().trim();
         filtered = filtered.filter(item => 
@@ -259,15 +248,11 @@ function performSearch() {
         );
     }
     
-    // Apply type filter
     if (typeFilter !== 'all') {
         filtered = filtered.filter(item => item.type === typeFilter);
     }
     
-    // Display results
     displayItems(filtered);
-    
-    // Log search time (for demonstration)
     console.log(`Search completed. Found ${filtered.length} results.`);
 }
 
@@ -280,25 +265,50 @@ function resetSearch() {
 
 // Event listeners and page initialization
 document.addEventListener('DOMContentLoaded', function() {
-    // Display all items on page load
     displayItems(collectionData);
     
-    // Get DOM elements
     const searchBtn = document.getElementById('searchBtn');
     const resetBtn = document.getElementById('resetBtn');
     const searchInput = document.getElementById('searchInput');
+    const typeFilter = document.getElementById('typeFilter');
+    const cardGrid = document.getElementById('cardGrid');
     
-    // Add click event listeners
+    // Search actions
     searchBtn.addEventListener('click', performSearch);
     resetBtn.addEventListener('click', resetSearch);
     
-    // Add Enter key support for search
+    // Real-time filter when dropdown changes
+    typeFilter.addEventListener('change', performSearch);
+    
+    // Enter key support
     searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             performSearch();
         }
     });
     
-    // Log that prototype is ready
-    console.log('Search prototype loaded. Case insensitive search works. Click on any card to see details with image placeholder.');
+    // Event delegation for opening modals safely
+    cardGrid.addEventListener('click', function(e) {
+        const card = e.target.closest('.collection-card');
+        if (card) {
+            const itemId = card.getAttribute('data-id');
+            const selectedItem = collectionData.find(item => item.id === itemId);
+            if (selectedItem) {
+                showItemDetail(selectedItem);
+            }
+        }
+    });
+
+    // Dynamic FadeIn Keyframe style injection (Cleaned up)
+    if (!document.getElementById('modal-animation-style')) {
+        const style = document.createElement('style');
+        style.id = 'modal-animation-style';
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: scale(0.95); }
+                to { opacity: 1; transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 });
