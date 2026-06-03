@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tandanya Collection Search Prototype</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🏺 Tandanya Cultural Collection</h1>
+        <p>Preserving Indigenous heritage through smart collection management</p>
+    </div>
+
+    <div class="search-section">
+        <div class="search-box">
+            <div class="search-input-group">
+                <label>🔍 Search</label>
+                <input type="text" id="searchInput" placeholder="Search by ID, artist name, location, or material...">
+            </div>
+            <div class="filter-group">
+                <label>📂 Filter by Type</label>
+                <select id="typeFilter">
+                    <option value="all">All Types</option>
+                    <option value="painting">Painting</option>
+                    <option value="carving">Carving</option>
+                    <option value="weapon">Weapon</option>
+                    <option value="ceremony">Ceremonial Item</option>
+                </select>
+            </div>
+            <button class="search-btn" id="searchBtn">🔎 Search</button>
+            <button class="reset-btn" id="resetBtn">Reset</button>
+        </div>
+        <div class="results-header">
+            <div class="results-count" id="resultsCount">Showing all items</div>
+            <div class="performance-note">⚡ Results in under 2 seconds | 🔤 Case insensitive</div>
+        </div>
+    </div>
+
+    <div class="results-section">
+        <div class="card-grid" id="cardGrid"></div>
+    </div>
+
+    <div class="footer">
+        <p>© Tandanya Cultural Collection | Protecting cultural knowledge through technology</p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
