@@ -1,84 +1,84 @@
-// Collection data - Mock data for Tandanya's collection items
+// Collection data - Simplified with Item1, Item2, Actor1, Actor2
 const collectionData = [
     { 
-        id: "TAN-001", 
-        title: "Kangaroo Dreaming", 
-        artist: "Tommy Walker", 
-        location: "Storage Room B", 
-        material: "Canvas", 
-        year: "1998", 
-        type: "painting",
-        description: "Traditional dot painting depicting kangaroo dreaming stories from Central Australia."
-    },
-    { 
-        id: "TAN-002", 
-        title: "Emu Egg Carving", 
-        artist: "Emily James", 
-        location: "Display Case 3", 
-        material: "Emu Egg", 
-        year: "2005", 
-        type: "carving",
-        description: "Intricate carving on emu egg showing traditional hunting scenes."
-    },
-    { 
-        id: "TAN-003", 
-        title: "Hunting Spear", 
-        artist: "David Cooper", 
+        id: "Item1", 
+        title: "Traditional Painting Item1", 
+        actor: "Actor1", 
         location: "Storage Room A", 
-        material: "Wood", 
-        year: "1950", 
-        type: "weapon",
-        description: "Traditional hunting spear made from ironwood."
+        material: "Canvas", 
+        year: "404", 
+        type: "painting",
+        description: "This is Item1. Traditional painting created by Actor1."
     },
     { 
-        id: "TAN-004", 
-        title: "Corroboree Headpiece", 
-        artist: "Tommy Walker", 
+        id: "Item2", 
+        title: "Wooden Carving Item2", 
+        actor: "Actor2", 
+        location: "Display Case 1", 
+        material: "Wood", 
+        year: "404", 
+        type: "carving",
+        description: "This is Item2. Detailed carving made by Actor2."
+    },
+    { 
+        id: "Item3", 
+        title: "Ceremonial Item3", 
+        actor: "Actor1", 
         location: "Ceremony Room", 
         material: "Feathers", 
-        year: "2010", 
+        year: "404", 
         type: "ceremony",
-        description: "Ceremonial headpiece used in traditional corroboree dances."
+        description: "This is Item3. Ceremonial piece created by Actor1."
     },
     { 
-        id: "TAN-005", 
-        title: "Rainbow Serpent Painting", 
-        artist: "Sarah Jones", 
+        id: "Item4", 
+        title: "Weapon Item4", 
+        actor: "Actor3", 
+        location: "Storage Room B", 
+        material: "Ironwood", 
+        year: "404", 
+        type: "weapon",
+        description: "This is Item4. Traditional weapon made by Actor3."
+    },
+    { 
+        id: "Item5", 
+        title: "Modern Painting Item5", 
+        actor: "Actor2", 
         location: "Main Gallery", 
         material: "Canvas", 
-        year: "2015", 
+        year: "404", 
         type: "painting",
-        description: "Large scale painting of the Rainbow Serpent creation story."
+        description: "This is Item5. Contemporary painting by Actor2."
     },
     { 
-        id: "TAN-006", 
-        title: "Boomerang", 
-        artist: "Tommy Walker", 
-        location: "Storage Room B", 
+        id: "Item6", 
+        title: "Ceremonial Mask Item6", 
+        actor: "Actor1", 
+        location: "Ceremony Room", 
         material: "Wood", 
-        year: "1975", 
-        type: "weapon",
-        description: "Returning boomerang used for hunting and sport."
+        year: "404", 
+        type: "ceremony",
+        description: "This is Item6. Ceremonial mask created by Actor1."
     },
     { 
-        id: "TAN-007", 
-        title: "Shell Necklace", 
-        artist: "Emily James", 
+        id: "Item7", 
+        title: "Carving Item7", 
+        actor: "Actor3", 
         location: "Display Case 2", 
-        material: "Shell", 
-        year: "1990", 
-        type: "ceremony",
-        description: "Traditional shell necklace used in ceremonial dress."
+        material: "Stone", 
+        year: "404", 
+        type: "carving",
+        description: "This is Item7. Stone carving by Actor3."
     },
     { 
-        id: "TAN-008", 
-        title: "Wallaby Skin Cloak", 
-        artist: "David Cooper", 
-        location: "Storage Room A", 
-        material: "Leather", 
-        year: "1960", 
-        type: "ceremony",
-        description: "Warm cloak made from wallaby skins, decorated with ochre."
+        id: "Item8", 
+        title: "Hunting Tool Item8", 
+        actor: "Actor2", 
+        location: "Storage Room B", 
+        material: "Bone", 
+        year: "404", 
+        type: "weapon",
+        description: "This is Item8. Traditional hunting tool by Actor2."
     }
 ];
 
@@ -107,7 +107,7 @@ function displayItems(items) {
         <div class="collection-card">
             <div class="card-title">${item.title}</div>
             <div class="card-detail"><strong>ID:</strong> ${item.id}</div>
-            <div class="card-detail"><strong>Artist:</strong> ${item.artist}</div>
+            <div class="card-detail"><strong>Actor:</strong> ${item.actor}</div>
             <div class="card-detail"><strong>Location:</strong> ${item.location}</div>
             <div class="card-detail"><strong>Material:</strong> ${item.material}</div>
             <div class="card-detail"><strong>Year:</strong> ${item.year}</div>
@@ -133,7 +133,7 @@ function performSearch() {
         filtered = filtered.filter(item => 
             item.id.toLowerCase().includes(term) ||
             item.title.toLowerCase().includes(term) ||
-            item.artist.toLowerCase().includes(term) ||
+            item.actor.toLowerCase().includes(term) ||
             item.location.toLowerCase().includes(term) ||
             item.material.toLowerCase().includes(term) ||
             item.description.toLowerCase().includes(term)
